@@ -10,12 +10,11 @@ namespace Inputs
     public class PlayerInputHandler : MonoBehaviour
     {
         [SerializeField] PlayerInput playerInput;
-        [SerializeField] PlayerCombat combat;
-        [SerializeField] PlayerController motor = null;
+        //[SerializeField] PlayerCombat combat;
+        //[SerializeField] PlayerController controller = null;
         [SerializeField] private Vector2 move;
         [SerializeField] private Vector2 look;
         [SerializeField] private float index;
-        [SerializeField] private bool attack = false;
         
         private Controls controls;
         private Controls Controls
@@ -31,72 +30,45 @@ namespace Inputs
             playerInput = GetComponent<PlayerInput>();
         }
 
-        // Update is called once per frame
-        private void Start()
+        public void FindPlayer()
         {
-            /*index = playerInput.playerIndex;
-            var motors = FindObjectsOfType<PlayerController>();
+            index = playerInput.playerIndex;
+            /*var motors = FindObjectsOfType<PlayerController>();
             motor = motors.FirstOrDefault(m => m.GetPlayerIndex() == index);
 
             var combats = FindObjectsOfType<PlayerCombat>();
             combat = combats.FirstOrDefault(m => m.GetPlayerIndex() == index);*/
-
-        }
-        public void FindPlayer()
-        {
-            index = playerInput.playerIndex;
-            var motors = FindObjectsOfType<PlayerController>();
-            motor = motors.FirstOrDefault(m => m.GetPlayerIndex() == index);
-
-            var combats = FindObjectsOfType<PlayerCombat>();
-            combat = combats.FirstOrDefault(m => m.GetPlayerIndex() == index);
         }
         public void OnMove(CallbackContext context)
         {
-            if (motor == null) return;
-            move = context.ReadValue<Vector2>();
-            motor.SetMove(move);
+            /*if (controller == null) return;
+            var move = context.ReadValue<Vector2>();*/
         }
         public void OnLook(CallbackContext context)
         {
-            if (motor == null) return;
-            look = context.ReadValue<Vector2>();
-            motor.SetLook(look);
+            /*if (controller == null) return;
+            var look = context.ReadValue<Vector2>();*/
         }
         public void OnAttack(CallbackContext context)
         {
-            Debug.Log("OnAttack");
-            if (combat == null) return;
+            /*if (combat == null) return;
             var canc = context.canceled;
             var perf = context.performed;
-            combat.Attack(!canc, perf);
+            combat.Attack(!canc, perf);*/
         }
         public void OnDash(CallbackContext context)
         {
-            Debug.Log("OnDash");
-            if (combat == null) return;
-            var canc = context.canceled;
-            combat.Dash(!canc);
-        }
-        public void OnZone()
-        {
-            Debug.Log("OnB");
-            if (combat == null) return;
-            combat.Zone();
-        }
-        public void OnBigAttack(CallbackContext context)
-        {
-            Debug.Log("OnBigAttack");
-            if (combat == null) return;
+            /*if (combat == null) return;
             var canc = context.canceled;
             var perf = context.performed;
-            combat.BigAttack(perf, canc);
+            combat.Dash(!canc, perf);*/
         }
-        public void OnDefense()
+        public void OnJump(CallbackContext context)
         {
-            Debug.Log("OnDefense");
-            if (combat == null) return;
-            combat.Defense();
+            /*if (combat == null) return;
+            var canc = context.canceled;
+            var perf = context.performed;
+            controller.Jump(!canc, perf);*/
         }
     }
 }

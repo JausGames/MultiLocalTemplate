@@ -42,14 +42,6 @@ public class PlayerManager : MonoBehaviour
     }
     public void SetMatchUp()
     {
-        var spells = FindObjectsOfType<Spell>();
-        if (spells.Length > 0)
-        {
-            foreach(Spell spell in spells)
-            {
-                spell.DestroySpell();
-            }
-        }
         Debug.Log("PlayerManager, Set Match Up");
         alive.Clear();
         for (int i = 0; i < players.Count; i++)
@@ -57,14 +49,11 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Set Match Up :" + players[i]);
             alive.Add(players[i]);
             players[i].SetAlive(true);
-            players[i].ResetHealth();
             players[i].StopMotion();
             players[i].transform.localPosition = positions[i];
             players[i].transform.localRotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-            players[i].controller.SetCanMove(false);
-            players[i].combat.SetCanMove(false);
-            players[i].Revive();
-            players[i].PlaySpawnAnim();
+            //players[i].controller.SetCanMove(false);
+            //players[i].combat.SetCanMove(false);
         }
         SetUIUp();
     }
@@ -112,8 +101,8 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("PlayerManager, Set Can Move");
         foreach (Player player in players)
         {
-            player.controller.SetCanMove(true);
-            player.combat.SetCanMove(true);
+            //player.controller.SetCanMove(true);
+            //player.combat.SetCanMove(true);
         }
 
     }
